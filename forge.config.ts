@@ -12,6 +12,11 @@ import { rendererConfig } from './webpack.renderer.config';
 const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
+
+    // An URL to an ICO file to use as the application icon (displayed in Control Panel > Programs and Features).
+    icon: './static/images/icon', // no file extension required
+    // The ICO file to use as the icon for the generated Setup.exe
+    // setupIcon: './static/images/icon'
   },
   rebuildConfig: {},
   makers: [new MakerSquirrel({}), new MakerZIP({}, ['darwin']), new MakerRpm({}), new MakerDeb({})],
@@ -24,7 +29,7 @@ const config: ForgeConfig = {
         entryPoints: [
           {
             html: './src/index.html',
-            js: './src/renderer.ts',
+            js: './src/frontend.ts',
             name: 'main_window',
             preload: {
               js: './src/preload.ts',

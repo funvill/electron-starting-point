@@ -20,7 +20,7 @@
  */
 
 import './index.css';
-console.log('👋 This message is being logged by "renderer.js", included via webpack');
+console.log('👋 This message is being logged by "frontend.ts", included via webpack');
 
 // Add the current date to the output div.
 document.querySelector('#output').innerHTML += 'Starting up ' + new Date() + '<br>';
@@ -30,21 +30,24 @@ document.querySelector('#output').innerHTML += 'Starting up ' + new Date() + '<b
 // Add a click event handler to the button
 // This event will be handled by the main process / BrowserWindow
 document.querySelector('#browserButton').addEventListener('click', () => {
-  document.querySelector('#output').innerHTML += 'browserButton - Input was: ' + document.querySelector('#input').value + '</br>';
+  const inputValue = document.querySelector('#input').value;
+  document.querySelector('#output').innerHTML += 'browserButton - Input was: ' + inputValue + '</br>';
 });
 
-// Add a click event handler to the button
-// This event will be passed to ipcMain in the main process to be handled by the node process.
-// const {ipcRenderer} = require('electron');
-document.querySelector('#nodeButton').addEventListener('click', () => {
+// --------------------------------------------------
 
+// Add a click event handler to the Node Button
+document.querySelector('#nodeButton').addEventListener('click', () => {
   const inputValue = document.querySelector('#input').value;
-  
-  window.api.invoke('myfunc', [inputValue])
-    .then(function(results) {
-      document.querySelector('#output').innerHTML += "NodeButton Results: " + results + "<br>";
-    })
-    .catch(function(err) {
-      document.querySelector('#output').innerHTML += "NodeButton Results: Error: " + err + "<br>";
-    });
+
+  // https://stackoverflow.com/a/73792762/58456
+  // Note: The arguments passed to the function must come in as a array.
+  // The array can contain any number of arguments. Think of it as command line arguments.
+  //
+  // The window.api object was injected into the window/browser by preload.js
+  window.api.invoke('myfunc', [inputValue]).then(function (results) {
+    document.querySelector('#output').innerHTML += "NodeButton Results: " + results + "<br>";
+  }).catch(function (error) {
+    document.querySelector('#output').innerHTML += "NodeButton Results: Error: " + error + "<br>";
+  });
 });
