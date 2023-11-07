@@ -13,9 +13,21 @@ export async function myfunc(_event:any, data:any[]) {
   return new Promise(function (resolve, reject) { // do stuff
     if (true) {
       shell.openExternal('https://github.com')
-      resolve("this worked! data:" + data[0]);
+      resolve("myfunc1 - this worked! data:" + data[0]);
     } else {
-      reject("this didn't work!");
+      reject("myfunc1 - this didn't work!");
+    }
+  });
+}
+
+// Note: Data is an array of arguments passed from the frontend.
+export async function myfunc2(_event:any, data:any[]) {
+  return new Promise(function (resolve, reject) { // do stuff
+    if (true) {
+      shell.openExternal('https://github.com/funvill/electron-starting-point')
+      resolve("myfunc2 - This worked! data:" + data[0]);
+    } else {
+      reject("myfunc2 - This didn't work!");
     }
   });
 }
