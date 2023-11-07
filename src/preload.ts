@@ -49,7 +49,7 @@ declare global {
 contextBridge.exposeInMainWorld("api", {
   invoke: (channel:any, data:any) => {
     // list of ipcMain.handle channels you want access in frontend to
-    const validChannels = ["myfunc", "myfunc2"]; 
+    const validChannels = ["myfunc", "myfunc2", "launchProgram", "CheckProgram", "KillProgram", "loadCASBACnetStack"]; 
     if (validChannels.includes(channel)) {
       // ipcRenderer.invoke accesses ipcMain.handle channels like 'myfunc'
       // make sure to include this return statement or you won't get your Promise back

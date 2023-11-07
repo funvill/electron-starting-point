@@ -51,3 +51,48 @@ document.querySelector('#nodeButton').addEventListener('click', () => {
     document.querySelector('#output').innerHTML += "NodeButton Results: Error: " + error + "<br>";
   });
 });
+
+
+
+// Add a click event handler to the Node Button
+document.querySelector('#launch').addEventListener('click', () => {
+  // The window.api object was injected into the window/browser by preload.js
+  window.api.invoke('launchProgram', []).then(function (results:string) {
+    document.querySelector('#output').innerHTML += "launchProgram Results: " + results + "<br>";
+  }).catch(function (error:any) {
+    document.querySelector('#output').innerHTML += "launchProgram Results: Error: " + error + "<br>";
+  });
+});
+
+// Add a click event handler to the Node Button
+document.querySelector('#CheckProgram').addEventListener('click', () => {
+  // The window.api object was injected into the window/browser by preload.js
+  window.api.invoke('CheckProgram', []).then(function (results:string) {
+    document.querySelector('#output').innerHTML += "CheckProgram Results: " + results + "<br>";
+  }).catch(function (error:any) {
+    document.querySelector('#output').innerHTML += "CheckProgram Results: Error: " + error + "<br>";
+  });
+});
+
+// Add a click event handler to the Node Button
+document.querySelector('#KillProgram').addEventListener('click', () => {
+  // The window.api object was injected into the window/browser by preload.js
+  window.api.invoke('KillProgram', []).then(function (results:string) {
+    document.querySelector('#output').innerHTML += "KillProgram Results: " + results + "<br>";
+  }).catch(function (error:any) {
+    document.querySelector('#output').innerHTML += "KillProgram Results: Error: " + error + "<br>";
+  });
+});
+
+
+// Add a click event handler to the Node Button
+document.querySelector('#loadCASBACnetStack').addEventListener('click', () => {
+  // The window.api object was injected into the window/browser by preload.js
+  window.api.invoke('loadCASBACnetStack', []).then(function (results:string) {
+    document.querySelector('#output').innerHTML += "loadCASBACnetStack Results: " + results + "<br>";
+  }).catch(function (error:any) {
+    document.querySelector('#output').innerHTML += "loadCASBACnetStack Results: Error: " + error + "<br>";
+  });
+});
+
+
