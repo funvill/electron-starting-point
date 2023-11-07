@@ -1,8 +1,8 @@
 {
-  "name": "Electron Boilerplate",
+  "name": "Electron-Boilerplate",
   "productName": "boilerplate-app",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Electron-Boilerplate application description",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",

@@ -30,7 +30,7 @@ document.querySelector('#output').innerHTML += 'Starting up ' + new Date() + '<b
 // Add a click event handler to the button
 // This event will be handled by the main process / BrowserWindow
 document.querySelector('#browserButton').addEventListener('click', () => {
-  const inputValue = document.querySelector('#input').value;
+  const inputValue = (<HTMLInputElement>document.querySelector('#input')).value;
   document.querySelector('#output').innerHTML += 'browserButton - Input was: ' + inputValue + '</br>';
 });
 
@@ -38,16 +38,16 @@ document.querySelector('#browserButton').addEventListener('click', () => {
 
 // Add a click event handler to the Node Button
 document.querySelector('#nodeButton').addEventListener('click', () => {
-  const inputValue = document.querySelector('#input').value;
+  const inputValue = (<HTMLInputElement>document.querySelector('#input')).value;
 
   // https://stackoverflow.com/a/73792762/58456
   // Note: The arguments passed to the function must come in as a array.
   // The array can contain any number of arguments. Think of it as command line arguments.
   //
   // The window.api object was injected into the window/browser by preload.js
-  window.api.invoke('myfunc', [inputValue]).then(function (results) {
+  window.api.invoke('myfunc', [inputValue]).then(function (results:string) {
     document.querySelector('#output').innerHTML += "NodeButton Results: " + results + "<br>";
-  }).catch(function (error) {
+  }).catch(function (error:any) {
     document.querySelector('#output').innerHTML += "NodeButton Results: Error: " + error + "<br>";
   });
 });

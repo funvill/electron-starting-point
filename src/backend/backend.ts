@@ -9,7 +9,7 @@
 import {shell} from 'electron';
 
 // Note: Data is an array of arguments passed from the frontend.
-export async function myfunc(_event, data) {
+export async function myfunc(_event:any, data:any[]) {
   return new Promise(function (resolve, reject) { // do stuff
     if (true) {
       shell.openExternal('https://github.com')

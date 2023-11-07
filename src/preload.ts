@@ -15,7 +15,7 @@ console.log('👋 This message is being logged by "preload.ts"');
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
 window.addEventListener('DOMContentLoaded', () => {
-  const replaceText = (selector, text) => {
+  const replaceText = (selector:any, text:string) => {
     const element = document.getElementById(selector)
     if (element) {
       element.innerText = text;
@@ -35,13 +35,20 @@ window.addEventListener('DOMContentLoaded', () => {
  * to access this stuff as a result.
  */
 
+// Fix TypeScript error: Property 'api' does not exist on type 'Window & typeof globalThis'.
+// https://stackoverflow.com/a/67246476/58456
+declare global {
+  interface Window {
+    api?: any;
+  }
+}
 
 // This allows the front end to access the API.
 // The API functions are then sendt to the main process via ipcRenderer.invoke
 // https://stackoverflow.com/a/73792762/58456
 contextBridge.exposeInMainWorld("api", {
-  invoke: (channel, data) => {
-    let validChannels = ["myfunc"]; // list of ipcMain.handle channels you want access in frontend to
+  invoke: (channel:any, data:any) => {
+    const validChannels = ["myfunc"]; // list of ipcMain.handle channels you want access in frontend to
     if (validChannels.includes(channel)) {
       // ipcRenderer.invoke accesses ipcMain.handle channels like 'myfunc'
       // make sure to include this return statement or you won't get your Promise back
